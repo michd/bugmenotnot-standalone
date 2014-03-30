@@ -19,11 +19,11 @@ doc = Nokogiri::HTML(open("http://bugmenot.com/view/#{site}"))
 output = []
 doc.css(ITEM_SELECTOR).each do |item|
   login_details = {
-    :username => item.css('dl dd:nth-of-type(1)').text,
-    :password => item.css('dl dd:nth-of-type(2)').text
+    :username => item.css(USERNAME_SELECTOR).text,
+    :password => item.css(PASSWORD_SELECTOR).text
   }
 
-  other = item.css('dl dd:nth-of-type(3):not(.stats)').text
+  other = item.css(OTHER_SELECTOR).text
 
   login_details[:other] = other if other.strip != ''
   output << login_details
